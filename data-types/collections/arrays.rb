@@ -30,7 +30,6 @@ class ArraysTest < Minitest::Test
     actual = nums.last
     expected = 3
     assert_equal expected, actual
-
     # Now try to find another way to achieve the same effect
     nums = [1,2,3]
     actual = nums[2]
