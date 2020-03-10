@@ -13,18 +13,53 @@ class Direwolf
     return @starks_to_protect
   end
 
-  def protects(Stark)
-    Stark
+  def protects(name)
+    if name.location == @home && @starks_to_protect.count != 2
+      @starks_to_protect << name
+      name.safe = true
+    end
   end
+
+  def hunts_white_walkers?
+    if @starks_to_protect == []
+      true
+    else
+      false
+    end
+  end
+
+  def leaves(name)
+    if @starks_to_protect.include?(name) == true
+      name.safe = false
+      @starks_to_protect.delete(name)
+    else
+      return name
+    end
+  end
+
 end
 
 class Stark
 
-  attr_accessor :name, :location
+  attr_accessor :name, :location, :safe
 
   def initialize(name, location = "Winterfell")
     @name = name
     @location = location
+    @safe = false
+    @house_words = "Winter is Coming"
+  end
+
+  def safe?
+      @safe
+  end
+
+  def house_words
+    if @name == "Arya"
+      return 'The North Remembers'
+    else
+      return @house_words
+    end
   end
 
 end
