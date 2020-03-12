@@ -1,6 +1,6 @@
 class Medusa
 
-  attr_accessor :name, :statues
+  attr_reader :name, :statues, :victims
 
   def initialize(name)
     @name = name
@@ -15,13 +15,14 @@ class Medusa
   def stare(victim)
     if @victims < 3
       @victims += 1
+      victim.is_stoned
       @statues << victim
     else
       @statues << victim
-      @statues[0].stoned = false
+      @statues[0].reset_stoned
       @statues.delete_at(0)
     end
-    victim.stoned = true
+    victim.is_stoned
   end
 
   def count_of_stoned
@@ -32,7 +33,7 @@ end
 
 class Person
 
-  attr_accessor :name, :stoned
+  attr_reader :stoned, :name
 
   def initialize(name)
     @name = name
@@ -41,6 +42,14 @@ class Person
 
   def stoned?
     @stoned
+  end
+
+  def reset_stoned
+    @stoned = false
+  end
+
+  def is_stoned
+    @stoned = true
   end
 
 end
