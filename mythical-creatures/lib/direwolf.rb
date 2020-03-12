@@ -1,6 +1,6 @@
 class Direwolf
 
-  attr_accessor :name, :home, :size, :starks_to_protect
+  attr_reader :name, :home, :size, :starks_to_protect
 
   def initialize(name, home = "Beyond the Wall", size = "Massive")
     @name = name
@@ -10,13 +10,13 @@ class Direwolf
   end
 
   def starks_to_protect
-    return @starks_to_protect
+    @starks_to_protect
   end
 
   def protects(name)
     if name.location == @home && @starks_to_protect.count != 2
       @starks_to_protect << name
-      name.safe = true
+      name.safe
     end
   end
 
@@ -30,7 +30,7 @@ class Direwolf
 
   def leaves(name)
     if @starks_to_protect.include?(name) == true
-      name.safe = false
+      name.left
       @starks_to_protect.delete(name)
     else
       return name
@@ -41,7 +41,7 @@ end
 
 class Stark
 
-  attr_accessor :name, :location, :safe
+  attr_reader :name, :location, :safe
 
   def initialize(name, location = "Winterfell")
     @name = name
@@ -60,6 +60,14 @@ class Stark
     else
       return @house_words
     end
+  end
+
+  def safe
+    @safe = true
+  end
+
+  def left
+    @safe = false
   end
 
 end

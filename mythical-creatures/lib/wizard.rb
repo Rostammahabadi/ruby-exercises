@@ -1,6 +1,6 @@
 class Wizard
 
-  attr_accessor :name, :bearded, :incantation
+  attr_reader :name, :bearded, :incantation
 
   def initialize(name, bearded = true)
     @name = name

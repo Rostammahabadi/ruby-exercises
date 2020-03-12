@@ -1,6 +1,6 @@
 class Vampire
 
-  attr_accessor :name, :pet
+  attr_reader :name, :pet
 
   def initialize(name, pet = "bat")
     @name = name
@@ -16,5 +16,5 @@ class Vampire
     @thirsty = false
     @thirsty
   end
-  
+
 end

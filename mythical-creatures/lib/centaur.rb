@@ -1,5 +1,5 @@
 class Centaur
-  attr_accessor :name, :breed, :getting_cranky
+  attr_reader :name, :breed, :getting_cranky
   def initialize(name, breed)
     @name = name
     @breed = breed

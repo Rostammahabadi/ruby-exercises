@@ -48,7 +48,6 @@ class CentaurTest < Minitest::Test
     centaur = Centaur.new("George","Palomino")
     3.times { centaur.shoot }
     assert_equal "NO!", centaur.shoot
-    centaur.run
   end
 
   def test_when_cranky_it_will_not_run
