@@ -1,6 +1,7 @@
 class Bag
 
-  attr_reader :candies, :empty
+  attr_reader :empty
+  attr_accessor :candies
   def initialize()
     @candies = []
     @empty = true
@@ -23,5 +24,7 @@ class Bag
   candies.any? do |candy|
     candy.type == type
   end
+
 end
+
 end
