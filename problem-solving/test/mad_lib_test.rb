@@ -1,6 +1,6 @@
 require_relative "test_helper"
-require "./lib/mad_lib"
-
+require_relative "../lib/mad_lib"
+require 'pry'
 class MadLibTest < Minitest::Test
 
   def test_it_can_create_a_mad_lib
@@ -28,4 +28,5 @@ class MadLibTest < Minitest::Test
 
     assert_equal expected, result
   end
+
 end
