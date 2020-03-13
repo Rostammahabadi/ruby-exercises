@@ -1,5 +1,6 @@
 require_relative "test_helper"
-require "./lib/hello"
+require_relative "../lib/hello"
+require 'pry'
 
 class HelloTest < Minitest::Test
 
