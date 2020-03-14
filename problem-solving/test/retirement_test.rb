@@ -1,6 +1,6 @@
 require_relative "test_helper"
-require "./lib/retirement"
-
+require_relative "../lib/retirement"
+require 'pry'
 class RetirementTest < Minitest::Test
 
   def test_it_tells_me_when_i_should_retire
