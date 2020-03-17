@@ -3,7 +3,6 @@ require "minitest/pride"
 require_relative '../lib/direwolf'
 require 'pry'
 class DirewolfTest < Minitest::Test
-
   def test_direwolf_has_a_name
     wolf = Direwolf.new('Nymeria')
 

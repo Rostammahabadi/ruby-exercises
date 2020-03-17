@@ -1,62 +1,49 @@
 class Centaur
-  attr_reader :name, :breed, :getting_cranky
+
+  attr_reader :name, :breed, :shoot, :run, :cranky, :standing, :rested, :sick
+
   def initialize(name, breed)
     @name = name
     @breed = breed
     @cranky = false
     @standing = true
-    @getting_cranky = 0
-    @shoot = "Twang!!!"
-    @run = "Clop clop clop clop!!!"
-    @sleep = "NO!"
-    @is_sick = false
+    @cranky_counter = 0
+    @rested = true
+    @sick = false
   end
 
   def shoot
-    @getting_cranky += 1
-    if @getting_cranky == 3 || @standing == false
-      @cranky = true
-      @shoot = "NO!"
-      @run = "NO!"
-      @shoot
-    end
-    @shoot
+    cranky_counter
+    return "Twang!!!" if @cranky == false && @standing == true
+    return "NO!" if @cranky == true || @standing == false
   end
 
   def run
-    @getting_cranky += 1
-    if @getting_cranky == 3 || @standing == false
-      @cranky = true
-      @run = "NO!"
-      @shoot = "NO!"
-      @run
-    end
-    @run
+    cranky_counter
+    return "Clop clop clop clop!!!" if @cranky == false && @standing == true
+    return "NO!" if @cranky == true || @standing == false
   end
 
   def cranky?
-    @cranky = true if @getting_cranky == 3
+    @cranky
   end
 
   def standing?
     @standing
   end
 
+  def cranky_counter
+    @cranky_counter += 1
+    @cranky = true if @cranky_counter == 3
+  end
+
   def sleep
-    if @standing == false
-      @cranky = false
-      @sleep = "OK!"
-      @getting_cranky = 0
-      @shoot = "Twang!!!"
-      @run = "Clop clop clop clop!!!"
-    else
-      @sleep
-    end
+    return "NO!" if @standing == true
+    reset_cranky if @standing == false
   end
 
   def lay_down
-    @standing=false
-    @standing
+    @standing = false
   end
 
   def laying?
@@ -65,23 +52,24 @@ class Centaur
 
   def stand_up
     @standing = true
-    @standing
+  end
+
+  def reset_cranky
+    @cranky = false
   end
 
   def drink_potion
-    if @standing == false
-    @cranky = false
-  elsif @cranky == false
-    @is_sick = true
-    false
+    @sick = true if @rested == true
+    @rested = true if @standing == true
+    return false if @standing == false
   end
-end
 
   def rested?
-    true if @cranky == false
+    @rested
   end
 
   def is_sick?
-    @is_sick
+    @sick
   end
+
 end

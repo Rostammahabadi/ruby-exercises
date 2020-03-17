@@ -9,64 +9,48 @@ class Direwolf
     @starks_to_protect = []
   end
 
-  def starks_to_protect
-    @starks_to_protect
-  end
-
-  def protects(name)
-    if name.location == @home && @starks_to_protect.count != 2
-      @starks_to_protect << name
-      name.safe
-    end
+  def protects(stark)
+    @starks_to_protect << stark if @home == stark.location && @starks_to_protect.count != 2
+    stark.is_safe
   end
 
   def hunts_white_walkers?
-    if @starks_to_protect == []
-      true
-    else
-      false
-    end
+    true if @starks_to_protect.count == 0
   end
 
-  def leaves(name)
-    if @starks_to_protect.include?(name) == true
-      name.left
-      @starks_to_protect.delete(name)
-    else
-      return name
-    end
+  def leaves(stark)
+    stark.is_unsafe
+    @starks_to_protect.delete(stark)
+    return stark if @starks_to_protect.include?(stark) == false
   end
 
 end
 
+
 class Stark
 
-  attr_reader :name, :location, :safe
+  attr_reader :name, :location
 
   def initialize(name, location = "Winterfell")
     @name = name
     @location = location
     @safe = false
-    @house_words = "Winter is Coming"
   end
 
   def safe?
-      @safe
+    @safe
   end
 
-  def house_words
-    if @name == "Arya"
-      return 'The North Remembers'
-    else
-      return @house_words
-    end
-  end
-
-  def safe
+  def is_safe
     @safe = true
   end
 
-  def left
+  def house_words
+    return "Winter is Coming" if @name != "Arya"
+    return "The North Remembers" if @name == 'Arya'
+  end
+
+  def is_unsafe
     @safe = false
   end
 
